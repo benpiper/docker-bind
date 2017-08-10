@@ -9,4 +9,10 @@
 zone "siliconharbor.io" {
 	type master;
 	file "/var/lib/bind/siliconharbor.io.hosts";
+	allow-update {
+		any;
+		};
+	allow-query {
+		any;
+		};
 	};

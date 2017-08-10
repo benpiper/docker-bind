@@ -13,6 +13,7 @@ RUN rm -rf /etc/apt/apt.conf.d/docker-gzip-indexes \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y bind9=${BIND_VERSION}* bind9-host=${BIND_VERSION}* webmin=${WEBMIN_VERSION}* dnsutils \
  && rm -rf /var/lib/apt/lists/*
 
+COPY /example/srv/docker/bind/ /data
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 

@@ -1,9 +1,15 @@
 $ttl 38400
 siliconharbor.io.	IN	SOA	dns1. dnsmaster.siliconharbor.io. (
-			1502327654
+			1502327661
 			10800
 			3600
 			604800
 			38400 )
 siliconharbor.io.	IN	NS	dns1.
 test.siliconharbor.io.	IN	A	198.51.100.254
+web1.siliconharbor.io.	IN	A	10.3.1.100
+web2.siliconharbor.io.	IN	A	10.3.2.200
+db1.siliconharbor.io.	IN	A	10.4.1.100
+db2.siliconharbor.io.	IN	A	10.4.2.200
+chs-pc1.siliconharbor.io.	IN	A	10.20.0.100
+atl-pc1.siliconharbor.io.	IN	A	10.30.0.100

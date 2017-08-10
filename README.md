@@ -17,7 +17,14 @@ BIND is open source software that implements the Domain Name System (DNS) protoc
 
 Before reporting your issue please try updating Docker to the latest version and check if it resolves the issue. Refer to the Docker [installation guide](https://docs.docker.com/installation) for instructions.
 
-SELinux users should try disabling SELinux using the command `setenforce 0` to see if it resolves the issue.
+SELinux users may need to update the security context of the host mountpoint so that it plays nicely with Docker:
+
+```bash
+mkdir -p /srv/docker/bind
+chcon -Rt svirt_sandbox_file_t /srv/docker/bind
+```
+
+If SELinux still gets in the way, you can try disabling it using the command `setenforce 0` to see if it resolves the issue.
 
 If the above recommendations do not help then [report your issue](../../issues/new) along with the following information:
 
@@ -51,7 +58,7 @@ docker run --name dns1 -d --restart=always \
   benpiper/docker-bind:latest
 ```
 
-*Alternatively, you can use the sample [docker-compose.yml](docker-compose.yml) file to start the container using [Docker Compose](https://docs.docker.com/compose/)*
+This will load BIND with a sample configuration and zone (siliconharbor.io). If you want to start with a clean slate, see the following [Persistence](#persistence) section.
 
 When the container is started the [Webmin](http://www.webmin.com/) service is also started and is accessible from the web browser at https://localhost:10000. Login to Webmin with the username `root` and password `password`. Specify `--env ROOT_PASSWORD=secretpassword` on the `docker run` command to set a password of your choosing.
 
@@ -59,17 +66,12 @@ The launch of Webmin can be disabled by adding `--env WEBMIN_ENABLED=false` to t
 
 ## Persistence
 
-For BIND to preserve its state across container deletion you should mount a volume at `/data` by adding the following flags to the `docker run` command:
+For BIND to preserve its state across container deletion you can mount a volume at `/data` by adding the following flags to the `docker run` command:
 ```bash
 --volume /srv/docker/bind:/data
 ```
 
-SELinux users should update the security context of the host mountpoint so that it plays nicely with Docker:
-
-```bash
-mkdir -p /srv/docker/bind
-chcon -Rt svirt_sandbox_file_t /srv/docker/bind
-```
+*Alternatively, you can use the sample [docker-compose.yml](docker-compose.yml) file to start the container using [Docker Compose](https://docs.docker.com/compose/)*
 
 # Maintenance
 

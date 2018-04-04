@@ -14,6 +14,6 @@ COPY /example/srv/docker/bind/ /data
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 
-EXPOSE 53/udp 53/tcp 10000/tcp
+EXPOSE 53/udp 53/tcp
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 CMD ["/usr/sbin/named"]

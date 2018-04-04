@@ -1,11 +1,7 @@
 #!/bin/bash
 set -e
 
-ROOT_PASSWORD=${ROOT_PASSWORD:-password}
-WEBMIN_ENABLED=${WEBMIN_ENABLED:-true}
-
 BIND_DATA_DIR=${DATA_DIR}/bind
-WEBMIN_DATA_DIR=${DATA_DIR}/webmin
 
 create_bind_data_dir() {
   mkdir -p ${BIND_DATA_DIR}
@@ -25,23 +21,6 @@ create_bind_data_dir() {
   fi
   rm -rf /var/lib/bind
   ln -sf ${BIND_DATA_DIR}/lib /var/lib/bind
-}
-
-create_webmin_data_dir() {
-  mkdir -p ${WEBMIN_DATA_DIR}
-  chmod -R 0755 ${WEBMIN_DATA_DIR}
-  chown -R root:root ${WEBMIN_DATA_DIR}
-
-  # populate the default webmin configuration if it does not exist
-  if [ ! -d ${WEBMIN_DATA_DIR}/etc ]; then
-    mv /etc/webmin ${WEBMIN_DATA_DIR}/etc
-  fi
-  rm -rf /etc/webmin
-  ln -sf ${WEBMIN_DATA_DIR}/etc /etc/webmin
-}
-
-set_root_passwd() {
-  echo "root:$ROOT_PASSWORD" | chpasswd
 }
 
 create_pid_dir() {
@@ -69,12 +48,6 @@ fi
 
 # default behaviour is to launch named
 if [[ -z ${1} ]]; then
-  if [ "${WEBMIN_ENABLED}" == "true" ]; then
-    create_webmin_data_dir
-    set_root_passwd
-    echo "Starting webmin..."
-    /etc/init.d/webmin start
-  fi
 
   echo "Starting named..."
   exec $(which named) -u ${BIND_USER} -g ${EXTRA_ARGS}

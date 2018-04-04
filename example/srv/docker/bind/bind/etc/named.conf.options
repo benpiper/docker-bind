@@ -22,6 +22,7 @@ options {
 
 	auth-nxdomain no;
 	listen-on-v6 { any; };
+	listen-on { any; };
 	recursion yes;
 	allow-query {
 		any;

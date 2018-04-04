@@ -1,4 +1,4 @@
-FROM sameersbn/ubuntu:14.04.20170608
+FROM resin/rpi-raspbian
 MAINTAINER sameer@damagehead.com
 
 ENV BIND_USER=bind \

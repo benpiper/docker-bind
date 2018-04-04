@@ -9,7 +9,7 @@
 
 # Introduction
 
-`Dockerfile` to create a [Docker](https://www.docker.com/) container image for [BIND](https://www.isc.org/downloads/bind/) DNS server.
+`Dockerfile` to create a [Docker](https://www.docker.com/) container image for ARM running the [BIND](https://www.isc.org/downloads/bind/) DNS server.
 
 BIND is open source software that implements the Domain Name System (DNS) protocols for the Internet. It is a reference implementation of those protocols, but it is also production-grade software, suitable for use in high-volume and high-reliability applications.
 

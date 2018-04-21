@@ -16,5 +16,3 @@ zone "28.172.in-addr.arpa"  { type master; file "/etc/bind/db.empty"; };
 zone "29.172.in-addr.arpa"  { type master; file "/etc/bind/db.empty"; };
 zone "30.172.in-addr.arpa"  { type master; file "/etc/bind/db.empty"; };
 zone "31.172.in-addr.arpa"  { type master; file "/etc/bind/db.empty"; };
-
-zone "168.192.in-addr.arpa" { type master; file "/etc/bind/db.empty"; };
